@@ -17,6 +17,7 @@ def register(request):
         else: 
             hashed_pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode() 
             new_user = User.objects.create(name=request.POST['name'], alias=request.POST['alias'], email = request.POST['email'], password = hashed_pw) 
+            request.session['user_id'] = new_user.id
             # UNCOMMENT BELOW and CHANGE FOR EXAM
             #return redirect('/books') 
     return redirect('/')
