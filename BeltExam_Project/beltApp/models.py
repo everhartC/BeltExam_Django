@@ -32,10 +32,14 @@ class UserManager(models.Manager):
         return errors
 
 class User(models.Model): 
-    name=models.CharField(max_length=30) 
-    alias=models.CharField(max_length=30) 
+    name = models.CharField(max_length=30) 
+    alias = models.CharField(max_length=30, blank=True) 
     email = models.CharField(max_length=80) 
     password = models.CharField(max_length=32) 
+    level = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True) 
     objects = UserManager()
+
+    def __repr__(self):
+        return f"Name: {self.name}, Email: {self.email}"
